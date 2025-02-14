@@ -8,7 +8,7 @@ export default function HomePage(props) {
     const [duration, setDuration] = useState(0)
 
     const mediaRecorder = useRef(null)  // useref used is a current object that does not trigger a re-render
-    const mimeType = 'audio/webm'
+    const mimeType = 'audio/webm'  // audio file type
 
     async function startRecording() {
         let tempStream
@@ -16,21 +16,28 @@ export default function HomePage(props) {
         console.log("Recording started")
 
         try {
+            // navigator is a global instance of the Navigator interface
+            // .mediaDevices returns an instance of the MediaDevices object
+            // .getUserMedia prompts the user for permissions. It returns a promise, hence the async function
             const streamData = navigator.mediaDevices.getUserMedia({
                 audio: true,
                 video: false
             })
+
+            // whent he promise is resolved we store the resulting media stream object into tempStream
             tempStream = streamData
 
         } catch(err) {
             console.log(err)
             return
         }
-
+        
+        // we pass in the media stream object along with the type of file
         const media = new MediaRecorder(tempStream, { type: mimeType })
-
+        
+        // store it into the useRef hook
         mediaRecorder.current = media
-        mediaRecorder.current.start()
+        mediaRecorder.current.start()  // being recording user
         
         let localAudioChunks = []
         mediaRecorder.current.ondataavailable = (event) => {
