@@ -21,7 +21,7 @@ export default function HomePage(props) {
                     setFile(tempFile)
                 }} className='hidden' type='file' accept='.mp3,.wave' /> a mp3 file</label>
             </p>
-            <p className='italic text-slate-500'>100% free and open source</p>
+            <p className='italic text-slate-400'>100% free and open source</p>
         </main>
     )
 }
