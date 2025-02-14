@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export default function HomePage(props) {
     const { setAudioStream, setFile } = props
+
+    const [recordingState, setRecordingState] = useState('inactive')
+    const [audioChunks, setAudioChunks] = useState([])
+    const [duration, setDuration] = useState(0)
+
+    const mediaRecorder = useRef(null)
 
     return (
         <main className='flex-1 p-4 flex flex-col gap-3 text-center sm:gap-4 md:gap-5 justify-center pb-20'>
