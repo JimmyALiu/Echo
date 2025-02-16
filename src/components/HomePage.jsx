@@ -48,6 +48,22 @@ export default function HomePage(props) {
         }
         setAudioChunks(localAudioChunks)
     }
+
+
+    async function stopRecording() {
+        setRecordingStatus('inactive')
+        console.log('Stop recording')
+
+        mediaRecorder.current.stop()
+        mediaRecorder.current.onstop = () => {
+            const audioBlob = new Blob(audioChunks, { type: mimeType })
+            setAudioStream(audioBlob)
+            setAudioChunks([])
+        }
+
+    }
+
+
     
     return (
         <main className='flex-1 p-4 flex flex-col gap-3 text-center sm:gap-4 md:gap-5 justify-center pb-20'>
