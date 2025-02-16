@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 export default function HomePage(props) {
     const { setAudioStream, setFile } = props
 
-    const [recordingState, setRecordingState] = useState('inactive')
+    const [recordingStatus, setRecordingStatus] = useState('inactive')
     const [audioChunks, setAudioChunks] = useState([])
     const [duration, setDuration] = useState(0)
 
@@ -31,6 +31,7 @@ export default function HomePage(props) {
             console.log(err)
             return
         }
+        setRecordingStatus('recording')
         
         // we pass in the media stream object along with the type of file
         const media = new MediaRecorder(tempStream, { type: mimeType })
