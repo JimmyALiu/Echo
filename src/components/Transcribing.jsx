@@ -11,7 +11,11 @@ export default function Transcribing() {
         </div>
 
         <div className='flex flex-col gap-2 sm:Gap-4 max-w-[500px] mx-auto w-full'>
-            
+            {[0, 1, 2].map(val => {
+                return (
+                    <div key={val} className={'rounded-full h-2 sm:h-3 bg-slate-400 loading ' + `loading${val}`}></div>
+                )
+            })}
         </div>
     </div>
   )
