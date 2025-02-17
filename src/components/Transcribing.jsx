@@ -3,7 +3,7 @@ import React from 'react'
 export default function Transcribing(props) {
     const { downloading } = props
     return (
-        <div className='flex items-center flex-col justify-center text-center gap-10 md:gap-14 py-24 p-4'>
+        <div className='flex flex-1 flex-col items-center justify-center text-center gap-10 md:gap-14 pb-24 p-4'>
             <div className='flex flex-col gap-2 sm:gap-4'>
                 <h1 className='bold font-semibold text-4xl sm: text-5xl md:text-6xl'><span className='text-blue-400 bold'>Transcribing</span></h1>
 
