@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 export default function FileDisplay(props) {
-    const { audioStream, file, handleAudioReset } = props
+    const { audioStream, file, handleAudioReset, handleFormSubmission } = props
     const audioRef = useRef()
 
     useEffect(() => {
