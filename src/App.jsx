@@ -25,7 +25,7 @@ function App() {
 
     useEffect(() => {
         if (!worker.current) {
-            worker.current = new Worker(new URL('./utils/whisper.worker.js', import.meta.url), {type: 'module'})
+            worker.current = new Worker(new URL('./utils/whisper.worker.js', import.meta.url), { type: 'module' })
         }
 
         const onMessageRecieved = async (e) => {
@@ -56,12 +56,12 @@ function App() {
 
         // cleanup 
         return () => worker.current.removeEventListener('message', onMessageRecieved)
-    }, [])
+    })
 
 
     async function readAudioFrom(file) {
         const sampling_rate = 16000
-        const audioCTX = new AudioContext({sampleRate: sampling_rate})
+        const audioCTX = new AudioContext({ sampleRate: sampling_rate })
         const response = await file.arrayBuffer()
         const decoded = await audioCTX.decodeAudioData(response)
         const audio = decoded.getChannelData(0)
