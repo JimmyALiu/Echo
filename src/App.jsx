@@ -57,6 +57,16 @@ function App() {
         return () => worker.current.removeEventListener('message', onMessageRecieved)
     }, [])
 
+
+    async function readAudioFrom(file) {
+        const sampling_rate = 16000
+        const audioCTX = new AudioContext({sampleRate: sampling_rate})
+        const response = await file.arrayBuffer()
+        const decoded = await audioCTX.decodeAudioData(response)
+        const audio = decoded.getChannelData(0)
+        return audio
+    }
+
     return (
         <div className='flex flex-col max-w-[1000px] mx-auto w-full'>
             <section className='min-h-screen flex flex-col'>
