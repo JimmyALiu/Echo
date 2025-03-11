@@ -50,6 +50,9 @@ function App() {
                     break;
             }
         }
+
+        worker.current.addEventListener('message', onMessageRecieved)
+
     }, [])
 
     return (
