@@ -3,6 +3,7 @@ import FileDisplay from './components/FileDisplay'
 import HomePage from './components/HomePage'
 import Header from './components/Header'
 import Information from './components/Information'
+import Transcribing from './components/Transcribing'
 import { MessageTypes } from './utils/presets'
 
 
@@ -91,7 +92,7 @@ function App() {
                 ) : loading ? (
                     <Transcribing />
                 ) : isAudioAvailable ? (
-                    <FileDisplay audioStream={audioStream} file={file} handleAudioReset={handleAudioReset} />
+                    <FileDisplay audioStream={audioStream} file={file} handleFormSubmission={handleFormSubmission} handleAudioReset={handleAudioReset} />
                 ) : (
                     <HomePage setAudioStream={setAudioStream} setFile={setFile} />
                 )}
