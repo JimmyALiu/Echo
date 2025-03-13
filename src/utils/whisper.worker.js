@@ -86,4 +86,83 @@ class GenerationTracker {
         this.processed_chunks = []
         this.callbackFunctionCounter = 0
     }
+
+    sendFinalResult() {
+        self.postMessage({ type: 'MessageTypes.INFERENCE_DONE' })
+    }
+
+    callbackFunction(beams) {
+        this.callbackFunctionCounter += 1
+        if (this.callbackFunctionCounter % 10 !== 0) {
+            return
+        }
+
+        const bestBeam = beams[0]
+        let text = this.pipeline.tokenizer.decode(bestBeam.output_token_ids, {
+            skip_special_tokens: true
+        })
+
+        const result = {
+            text,
+            start: this.getLastChunkTimestamp(),
+            end: undefined
+        }
+
+        createPartialResultMessage(result)
+    }
+
+    chunkCallback(data) {
+        this.chunks.push(data)
+        const [text, { chunks }] = this.pipeline.tokenizer._decode_asr(
+            this.chunks,
+            {
+                time_precision: this.time_precision,
+                return_timestamps: true,
+                roce_full_sequence: false
+            }
+        )
+
+        this.processed_chunks = chunks.map((chunk, index) => {
+            this.processed_chunks(chunk, index)
+        })
+
+        createResultMessage(
+            this.processed_chunks, false, this.getLastChunkTimestamp()
+        )
+    }
+
+    getLastChunkTimestamp() {
+        if (this.processed_chunks.length === 0) {
+            return 0
+        }
+    }
+
+    processed_chunks(chunk, index) {
+        const { text, timestamp } = chunk
+        const [start, end] = timestamp
+
+        return {
+            index,
+            text: `${text.trim()}`,
+            start: Math.round(start),
+            end: Math.round(end) || Math.round(start + 0.9 * this.stride_length_s)
+        }
+    }
+
+}
+
+function createResultMessage(results, isDone, completedUntilTimestamp) {
+    self.postMessage({
+        type: MessageTypes.RESULT,
+        results,
+        isDone,
+        completedUntilTimestamp
+    })
+}
+
+function createPartialResultMessage(result) {
+    self.postMessage({
+        type: MessageTypes.RESULT_PARTIAL,
+        result
+    })
 }
