@@ -1,5 +1,9 @@
-import { pipeline } from '@xenova/transformers'
+import { pipeline, env } from '@xenova/transformers'
 import { MessageTypes } from './presets'
+
+// disable local models
+env.allowLocalModels = false;
+env.useBrowserCache = false;
 
 
 class MyTranscriptionPipeline {
@@ -11,7 +15,6 @@ class MyTranscriptionPipeline {
         if (this.instance === null) {
             this.instance = await pipeline(this.task, null, { progress_callback })
         }
-
         return this.instance
     }
 }
@@ -24,7 +27,7 @@ self.addEventListener('message', async (event) => {
 })
 
 async function transcribe(audio) {
-    sendLoadingMessage('Loading')
+    sendLoadingMessage('loading')
 
     let pipeline
 
@@ -35,6 +38,7 @@ async function transcribe(audio) {
     }
 
     sendLoadingMessage('success')
+
 
     const stride_length_s = 5
 
@@ -48,6 +52,7 @@ async function transcribe(audio) {
         callback_function: generationTracker.callbackFunction.bind(generationTracker),
         chunk_callback: generationTracker.chunkCallback.bind(generationTracker)
     })
+    
 
     generationTracker.sendFinalResult()
 }
