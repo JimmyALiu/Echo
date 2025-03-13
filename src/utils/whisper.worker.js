@@ -128,7 +128,7 @@ class GenerationTracker {
         )
 
         this.processed_chunks = chunks.map((chunk, index) => {
-            this.processed_chunks(chunk, index)
+            this.processChunk(chunk, index)
         })
 
         createResultMessage(
@@ -142,7 +142,7 @@ class GenerationTracker {
         }
     }
 
-    processed_chunks(chunk, index) {
+    processChunk(chunk, index) {
         const { text, timestamp } = chunk
         const [start, end] = timestamp
 
