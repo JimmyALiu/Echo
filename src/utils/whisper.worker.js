@@ -51,3 +51,28 @@ async function transcribe(audio) {
 
     generationTracker.sendFinalResult()
 }
+
+async function load_model_callback(data) {
+    const { status } = data
+    if (status === 'progress') {
+        const { file, progress, loaded, total } = data
+        setDownloadingMessage(file, progress, loaded, total)
+    }
+}
+
+function sendLoadingMessage(status) {
+    self.postMessage({
+        type: MessageTypes.LOADING,
+        status
+    })
+}
+
+async function sendDownloadingMessage(file, progress, loaded, total) {
+    self.postMessage({
+        type: MessageTypes.DOWNLOADING,
+        file,
+        progress,
+        loaded,
+        total
+    })
+}
