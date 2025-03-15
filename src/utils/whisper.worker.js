@@ -93,7 +93,7 @@ class GenerationTracker {
     }
 
     sendFinalResult() {
-        self.postMessage({ type: 'MessageTypes.INFERENCE_DONE' })
+        self.postMessage({ type: MessageTypes.INFERENCE_DONE })
     }
 
     callbackFunction(beams) {
@@ -123,12 +123,12 @@ class GenerationTracker {
             {
                 time_precision: this.time_precision,
                 return_timestamps: true,
-                roce_full_sequence: false
+                force_full_sequence: false
             }
         )
 
         this.processed_chunks = chunks.map((chunk, index) => {
-            this.processChunk(chunk, index)
+            return this.processChunk(chunk, index)
         })
 
         createResultMessage(
