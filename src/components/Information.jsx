@@ -21,9 +21,7 @@ export default function Information(props) {
                     <i className="fa-solid fa-copy"></i>
                 </button>
                 <button>
-                    <p>hi</p>
                     <i className="fa-solid fa-download"></i>
-                    <p>hi</p>
                 </button>
             </div>
         </main>
