@@ -19,11 +19,11 @@ export default function Information(props) {
             </div>
             
 
-            <div className='flex item-center gap-4'>
-                <button>
+            <div className='flex items-center gap-4 mx-auto text-base'>
+                <button className='specialBtn p-2 px-4 rounded'>
                     <i className="fa-solid fa-copy"></i>
                 </button>
-                <button>
+                <button className='specialBtn p-2 px-4 rounded'>
                     <i className="fa-solid fa-download"></i>
                 </button>
             </div>
