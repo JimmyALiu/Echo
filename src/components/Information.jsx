@@ -23,7 +23,15 @@ export default function Information(props) {
     }
 
     function generateTranslation() {
+        if (translating || toLanguage === 'Select language') return
+        
+        setTranslating(true)
 
+        Worker.current.postMessage({
+            text: output.map(val => val.text),
+            src_language: 'eng_Latn',
+            tgt_lang: toLanguage
+        })
     }
 
     const textElement = tab === 'transcription' ? output.map(val => val.text) : ''
@@ -38,7 +46,7 @@ export default function Information(props) {
             </div>
 
             <div className='my-6'>
-                {tab === 'transcription' ? <Transcription {...props} textElement={textElement} /> : <Translation {...props} textElement={textElement} toLanguage={toLanguage} setToLanguage={setToLanguage} translating={translating} translation={translation} setTranslating={setTranslating} setTranslation={setTranslation} />}
+                {tab === 'transcription' ? <Transcription {...props} textElement={textElement} /> : <Translation {...props} textElement={textElement} toLanguage={toLanguage} setToLanguage={setToLanguage} translating={translating} generateTranslation={generateTranslation} />}
             </div>
 
 
