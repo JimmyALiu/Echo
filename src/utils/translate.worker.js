@@ -18,7 +18,7 @@ class MyTranslationPipeline {
 }
 
 self.addEventListener('message', async (event) => {
-    let translator = await MyTranslationPiipeline.getInstance( x => {
+    let translator = await MyTranslationPipeline.getInstance( x => {
         self.postMessage(x)
     })
 
@@ -34,7 +34,7 @@ self.addEventListener('message', async (event) => {
             })
         }
     })
-    
+
     self.postMessage({
         status: 'complete',
         output
