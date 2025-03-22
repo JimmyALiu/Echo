@@ -15,6 +15,8 @@ export default function Translation(props) {
                         )
                     })}
                 </select>
+
+                <button className='specialBtn px-3 py-2 text-blue-400 rounded-[10px] cursor-pointer hover:text-blue-600 duration-200'>Translate</button>
             </div>
         </div>
     )
