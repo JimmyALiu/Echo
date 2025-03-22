@@ -54,7 +54,7 @@ export default function Information(props) {
         const element = document.createElement('a')
         const file = new Blob([textElement], { type: 'text/plain' })
         element.href = URL.createObjectURL(file)
-        element.download(`Echo_${(new Date()).toDateString()}.txt`)
+        element.download = `Echo_${(new Date()).toDateString()}.txt`
         document.body.appendChild(element)
         element.click()
     }
