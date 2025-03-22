@@ -13,7 +13,7 @@ export default function Information(props) {
 
     useEffect(() => {
         if (!worker.current) {
-            worker.current = new Worker(new URL('./utils/translation.worker.js', import.meta.url), { type: 'module' })
+            worker.current = new Worker(new URL('../utils/translate.worker.js', import.meta.url), { type: 'module' })
         }
 
         const onMessageRecieved = async (e) => {
@@ -27,8 +27,8 @@ export default function Information(props) {
                     break;
 
                 case 'update':
-                    setTranslation(e.data.results)
-                    console.log(e.data.results)
+                    setTranslation(e.data.output)
+                    console.log(e.data.output)
                     break;
 
                 case 'complete':
