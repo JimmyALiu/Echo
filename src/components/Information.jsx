@@ -44,6 +44,8 @@ export default function Information(props) {
         return () => worker.current.removeEventListener('message', onMessageRecieved)
     })
 
+    const textElement = tab === 'transcription' ? output.map(val => val.text) : translation || ''
+
     function handleCopy() {
         navigator.clipboard.writeText(textElement)
     }
@@ -69,7 +71,6 @@ export default function Information(props) {
         })
     }
 
-    const textElement = tab === 'transcription' ? output.map(val => val.text) : ''
 
     return (
         <main className='flex-1 p-4 flex flex-col gap-3 max-w-full mx-auto text-center max-w-prose w-full sm:gap-6 justify-center pb-20'>
