@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Transcription from './Transcription'
 import Translation from './Translation'
 
@@ -8,6 +8,41 @@ export default function Information(props) {
     const [translation, setTranslation] = useState(null)
     const [translating, setTranslating] = useState(null)
     const [toLanguage, setToLanguage] = useState('Select language')
+
+    const worker = useRef()
+
+    useEffect(() => {
+        if (!worker.current) {
+            worker.current = new Worker(new URL('./utils/translation.worker.js', import.meta.url), { type: 'module' })
+        }
+
+        const onMessageRecieved = async (e) => {
+            switch (e.data.status) {
+                case 'initiate':
+                    console.log('initiate')
+                    break;
+
+                case 'progress':
+                    console.log('progress')
+                    break;
+
+                case 'update':
+                    setTranslation(e.data.results)
+                    console.log(e.data.results)
+                    break;
+
+                case 'complete':
+                    setTranslating(false)
+                    console.log('ready')
+                    break;
+            }
+        }
+
+        worker.current.addEventListener('message', onMessageRecieved)
+
+        // cleanup 
+        return () => worker.current.removeEventListener('message', onMessageRecieved)
+    })
 
     function handleCopy() {
         navigator.clipboard.writeText()
