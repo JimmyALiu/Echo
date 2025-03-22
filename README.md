@@ -1,6 +1,6 @@
 # Echo
 
-React app that uses web workers to transcribe and translate audio.
+React app that uses web workers to run machine learning models that transcribe and translate audio.
 
 Hosted using netlify [here](https://echo-react.netlify.app)
 
