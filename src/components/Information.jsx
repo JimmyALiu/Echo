@@ -96,10 +96,10 @@ export default function Information(props) {
 
 
             <div className='flex items-center gap-4 mx-auto'>
-                <button title='Copy' className='max-w-[50px] aspect-square p-2 px-4 rounded-[8px] bg-white text-blue-300 hover:text-blue-400 duration-200 cursor-pointer'>
+                <button onClick={handleCopy} title='Copy' className='max-w-[50px] aspect-square p-2 px-4 rounded-[8px] bg-white text-blue-300 hover:text-blue-400 duration-200 cursor-pointer'>
                     <i className="fa-solid fa-copy"></i>
                 </button>
-                <button title='Download' className='max-w-[50px] aspect-square p-2 px-4 rounded-[8px] bg-white text-blue-300 hover:text-blue-400 duration-200 cursor-pointer'>
+                <button onClick={handleDownload} title='Download' className='max-w-[50px] aspect-square p-2 px-4 rounded-[8px] bg-white text-blue-300 hover:text-blue-400 duration-200 cursor-pointer'>
                     <i className="fa-solid fa-download"></i>
                 </button>
             </div>
