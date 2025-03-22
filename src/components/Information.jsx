@@ -82,7 +82,16 @@ export default function Information(props) {
             </div>
 
             <div className='my-6'>
-                {tab === 'transcription' ? <Transcription {...props} textElement={textElement} /> : <Translation {...props} textElement={textElement} toLanguage={toLanguage} setToLanguage={setToLanguage} translating={translating} generateTranslation={generateTranslation} />}
+                {(!finished || translating) && (
+                    <div className='grid place-items-center'>
+                        <i className='fa-solid fa-spinner animate-spin'></i>
+                    </div>
+                )}
+                {
+                    tab === 'transcription' ? 
+                    <Transcription {...props} textElement={textElement} /> : 
+                    <Translation {...props} textElement={textElement} toLanguage={toLanguage} setToLanguage={setToLanguage} translating={translating} generateTranslation={generateTranslation} />
+                }
             </div>
 
 
