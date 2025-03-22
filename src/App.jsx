@@ -13,7 +13,6 @@ function App() {
     const [output, setOutput] = useState(null)
     const [loading, setLoading] = useState(false)
     const [finished, setFinished] = useState(false)
-    const [downloading, setDownloading] = useState(false)
 
     const isAudioAvailable = file || audioStream
 
@@ -32,7 +31,6 @@ function App() {
         const onMessageRecieved = async (e) => {
             switch (e.data.type) {
                 case 'DOWNLOADING':
-                    setDownloading(true)
                     console.log('DOWNLOADING')
                     break;
 
