@@ -45,12 +45,12 @@ export default function Information(props) {
     })
 
     function handleCopy() {
-        navigator.clipboard.writeText()
+        navigator.clipboard.writeText(textElement)
     }
 
     function handleDownload() {
         const element = document.createElement('a')
-        const file = new Blob([], { type: 'text/plain' })
+        const file = new Blob([textElement], { type: 'text/plain' })
         element.href = URL.createObjectURL(file)
         element.download(`Echo_${(new Date()).toDateString()}.txt`)
         document.body.appendChild(element)
