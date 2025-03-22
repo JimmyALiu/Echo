@@ -3,7 +3,7 @@ import Transcription from './Transcription'
 import Translation from './Translation'
 
 export default function Information(props) {
-    const { output } = props
+    const { output, finished } = props
     const [tab, setTab] = useState('transcription')
     const [translation, setTranslation] = useState(null)
     const [translating, setTranslating] = useState(null)
