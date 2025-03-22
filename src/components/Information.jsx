@@ -62,10 +62,9 @@ export default function Information(props) {
         
         setTranslating(true)
 
-        Worker.current.postMessage({
         worker.current.postMessage({
             text: output.map(val => val.text),
-            src_language: 'eng_Latn',
+            src_lang: 'eng_Latn',
             tgt_lang: toLanguage
         })
     }
