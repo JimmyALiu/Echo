@@ -7,7 +7,7 @@ export default function Information(props) {
     const [tab, setTab] = useState('transcription')
     const [translation, setTranslation] = useState(null)
     const [translating, setTranslating] = useState(null)
-    const [toLanguage, setToLanguage] = useState(null)
+    const [toLanguage, setToLanguage] = useState('Select language')
 
     function handleCopy() {
         navigator.clipboard.writeText()
